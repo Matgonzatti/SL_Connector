@@ -22,7 +22,14 @@ namespace SL_Connector.Controllers
         [HttpGet]
         public async Task<IActionResult> Get(string controller, int id)
         {
-            return Ok(await _serviceLayer.Request($"{controller}{(id > 0 ? $"({id})" : "")}").GetAsync());
+            try
+            {
+                return Ok(await _serviceLayer.Request($"{controller}{(id > 0 ? $"({id})" : "")}").GetAsync());
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
         }
 
         [HttpPost]
@@ -41,7 +48,7 @@ namespace SL_Connector.Controllers
         }
 
         [HttpPatch("{id}")]
-        public async Task<IActionResult> Patch(string controller, int id, [FromBody] object value)
+        public async Task<IActionResult> Patch(int id, string controller, [FromBody] object value)
         {
             try
             {
@@ -58,7 +65,7 @@ namespace SL_Connector.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(string controller, int id, [FromBody] object value)
+        public async Task<IActionResult> Put(int id, string controller, [FromBody] object value)
         {
             try
             {
