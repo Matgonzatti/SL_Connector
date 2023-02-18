@@ -10,10 +10,10 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddSingleton(serviceLayer => new SLConnection(
-    "https://192.168.0.83:50000/b1s/v1/",
-    "SBO_CAFMAQUINAS_PRD",
-    "manager",
-    "sapb1"));
+    "https://localhost:50000/b1s/v1/",
+    "COMPANYBD",
+    "USER",
+    "PASSWORD"));
 
 var app = builder.Build();
 
